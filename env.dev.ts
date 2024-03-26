@@ -9,7 +9,7 @@ export const environment = {
     },
     admin: {
         name: 'SSESS3c48e47203cb9aa7ab600153bda26aac',
-        value: 'hNLzIaL2wEi2CJkyfW1O8bR7nY0YAWmyieb7YJ8H2iUYgbVt',
+        value: 'gaaWLJZXaNXbdaIlmtI1bRbWbMmg81jw7VCvx0iisGT8%2CIMx',
         domain: '.dev.montefioreeinstein.org',
         path: '/',
     }
