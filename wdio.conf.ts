@@ -137,7 +137,7 @@ export const config: Options.Testrunner = {
         browserName: 'chrome',
         'goog:chromeOptions': {
             args: [
-                'disable-gpu'],
+                'disable-gpu', '--headless'],
             extensions: [fs.readFileSync('./2.8_0.crx').toString('base64')],
         },
         acceptInsecureCerts: true,
@@ -195,18 +195,18 @@ export const config: Options.Testrunner = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: ['selenium-standalone',
-        // [QualityWatcherService, {
-        //     email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
-        //     apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-        //     testRunName: "[Release 0.37.7] Automated Regression",
-        //     description: 'This test run was created by the automation suite.',
-        //     projectId: 1,
-        //     includeAllCases: false,
-        //     ignoreSkipped: true,
-        //     generateShareableLink: true,
-        //     screenshotFolder: "./screenshots",
-        //     uploadScreenshot: true,
-        // }]
+        [QualityWatcherService, {
+            email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
+            apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
+            testRunName: `Daily Regression Run executed on ${new Date()}`,
+            description: `This test run was created by the automation suite during the daily regression run on the development environment`,
+            projectId: 1,
+            includeAllCases: false,
+            ignoreSkipped: true,
+            generateShareableLink: true,
+            screenshotFolder: "./screenshots",
+            uploadScreenshot: true,
+        }]
     ],
 
     // Framework you want to run your specs with.

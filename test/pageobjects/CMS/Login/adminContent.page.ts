@@ -9,7 +9,7 @@ class AdminContentPage extends Page {
      */
 
     public get btnAddContent () {
-        return $('a.button');
+        return $('a.button[href="/node/add"]');
     }
 
     public get linkLandingPage () {
