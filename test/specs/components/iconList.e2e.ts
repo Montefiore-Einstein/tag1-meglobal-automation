@@ -38,7 +38,7 @@ describe('Icon List Component Tests', () => {
     afterEach(async function() { 
         // Take a screenshot after each test/assertion
         const testName = this.currentTest?.fullTitle().replace(/\s/g, '_');
-        const screenshotPath = `./screenshots/Iconlist/${testName}.png`;
+        const screenshotPath = `./screenshots/IconList/${testName}.png`;
         await browser.saveScreenshot(screenshotPath);
     });
 
@@ -67,8 +67,9 @@ describe('Icon List Component Tests', () => {
 
      
     it('[S3C899] Verify that a site Content Administrator can create an Icon List Component with a single Item', async () => {
+        const id=`IconList-S3C899-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnIconList).scrollIntoView();
         (await QALayoutPage.btnIconList).click();
@@ -79,15 +80,16 @@ describe('Icon List Component Tests', () => {
         await expect(IconListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await IconListBlockPage.iconListElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await IconListBlockPage.iconListElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect($('span[data-analytics-click-text="bullet-square"]')).toBeExisting(); 
-        await expect(IconListBlockPage.listItem).toHaveText(iconListBlockData.text);   
+        await expect($(`#${id} span[data-analytics-click-text="bullet-square"]`)).toBeExisting(); 
+        await expect(IconListBlockPage.listItem(id)).toHaveText(iconListBlockData.text);   
     });
 
     it('[S3C900] Verify that a site Content Administrator can create an Icon List Component with multiple Items', async () => {
+        const id=`IconList-S3C900-${Date.now()}`;
         await (await QALayoutPage.tabLayout).click();
-        await QALayoutPage.createNewSection();
+        await QALayoutPage.createNewSection(id);
         await QALayoutPage.navigateToBlockList();
         (await QALayoutPage.btnIconList).scrollIntoView();
         (await QALayoutPage.btnIconList).click();
@@ -98,10 +100,10 @@ describe('Icon List Component Tests', () => {
         await expect(IconListBlockPage.successMsg).toBeDisplayed();
 
         await QALayoutPage.goToPageView();
-        await (await IconListBlockPage.iconListElement).scrollIntoView({ behavior: 'auto', block: 'center' });
+        await (await IconListBlockPage.iconListElement(id)).scrollIntoView({ behavior: 'auto', block: 'center' });
         
-        await expect($('span[data-analytics-click-text="bullet-square"]')).toBeExisting() 
-        await expect(IconListBlockPage.listItem).toHaveText(iconListBlockData.text+' 1');   
+        await expect($(`#${id} span[data-analytics-click-text="bullet-square"]`)).toBeExisting() 
+        await expect(IconListBlockPage.listItem(id)).toHaveText(iconListBlockData.text+' 1');
         await expect(IconListBlockPage.lastItem).not.toHaveAttribute('data-analytics-click-text');
     });
 
