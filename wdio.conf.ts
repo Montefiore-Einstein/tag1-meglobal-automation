@@ -132,13 +132,13 @@ export const config: Options.Testrunner = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 5,
+        maxInstances: 1,
         //
         browserName: 'chrome',
         'goog:chromeOptions': {
             args: [
-                'disable-gpu', '--headless'],
-            extensions: [fs.readFileSync('./2.8_0.crx').toString('base64')],
+                'disable-gpu', 'window-size=1920,1080', 'no-sandbox', 'headless'],
+            //extensions: [fs.readFileSync('./2.8_0.crx').toString('base64')],
         },
         acceptInsecureCerts: true,
         //'--auto-open-devtools-for-tabs' opens console
@@ -198,8 +198,8 @@ export const config: Options.Testrunner = {
         [QualityWatcherService, {
             email: process.env.QUALITYWATCHER_EMAIL,// Your QualityWatcher email
             apiKey: process.env.QUALITYWATCHER_API_KEY, // Your QualityWatcher API key
-            testRunName: `Daily Regression Run executed on ${new Date()}`,
-            description: `This test run was created by the automation suite during the daily regression run on the development environment`,
+            testRunName: `Daily Regression executed on ${new Date().toString()}`,
+            description: 'This test run was created by the CI pipeline during the daily regression run..',
             projectId: 1,
             includeAllCases: false,
             ignoreSkipped: true,
